@@ -7,13 +7,15 @@ var userChosenCharacter;
 var userWins = 0;
 var userLosses = 0;
 var enemyChosen = false;
+var enemyBattlerChoice;
 
 //selectors
 var tracerChoice = $(".tracer");
 var soldierChoice = $(".soldier");
 var doomfistChoice = $(".doomfist");
 var winstonChoice = $(".winston");
-var enemyBattler = $(".enemyBattler");
+var battle = $(".battleArea");
+var battleBtn = $(".battleBtn");
 
 //arrays
 var enemiesArray = [];
@@ -21,25 +23,25 @@ var defeatedArray = [];
 
 //objects
 var tracerObject = {
-    health: 150,
+    health: 100,
     attackPower: 6,
     counterPower:10
 };
 
 var soldierObject = {
-    health: 200,
+    health: 150,
     attackPower: 3,
     counterPower: 8
 };
 
 var doomfistObject = {
-    health: 250,
+    health: 200,
     attackPower: 2,
     counterPower: 7
 };
 
 var winstonObject = {
-    health: 300,
+    health: 250,
     attackPower: 2,
     counterPower: 5
 };
@@ -48,8 +50,19 @@ var winstonObject = {
 
 //get character choice if tracer
 tracerChoice.on("click", function(){
+
+    //If the user has chosen a character do this instead
     if(userChosen === true){
-        
+
+        //If user has chosen a character, but there is no enemy, and this has the class enemyBattler send it to the battle arena
+        if(enemyChosen=== false && tracerChoice.hasClass("enemyBattler")){
+            enemyChosen = true;
+            tracerChoice.appendTo(battle);
+            enemyBattlerChoice = tracerObject;
+        }else{
+           
+            
+        }
     }else{
         //This makes the userchoice the tracer object
         userChoice = tracerObject;
@@ -76,7 +89,11 @@ tracerChoice.on("click", function(){
 
 soldierChoice.on("click", function() {
     if(userChosen === true){
-        console.log("A character was already chosen");
+        if(enemyChosen=== false && soldierChoice.hasClass("enemyBattler")){
+            enemyChosen = true;
+            soldierChoice.appendTo(battle);
+            enemyBattlerChoice = soldierObject;
+        }
     }else{
         userChoice = soldierObject;
         userChosen = true;
@@ -92,7 +109,11 @@ soldierChoice.on("click", function() {
 
 doomfistChoice.on("click", function() {
     if(userChosen === true){
-        console.log("A character was already chosen");
+        if(enemyChosen=== false && doomfistChoice.hasClass("enemyBattler")){
+            enemyChosen = true;
+            doomfistChoice.appendTo(battle);
+            enemyBattlerChoice = doomfistObject;
+        }
     }else{
         userChoice = doomfistObject;
         userChosen = true;
@@ -108,11 +129,14 @@ doomfistChoice.on("click", function() {
 
 winstonChoice.on("click", function() {
     if(userChosen === true){
-        console.log("A character was already chosen");
+        if(enemyChosen=== false && winstonChoice.hasClass("enemyBattler")){
+            enemyChosen = true;
+            winstonChoice.appendTo(battle);
+            enemyBattlerChoice = winstonObject;
+        }
     }else{
         userChoice = winstonObject;
         userChosen = true;
-        console.log("You picked winston!");
         enemiesArray.push(tracerChoice, soldierChoice, doomfistChoice);
         for (let i =0; i < enemiesArray.length; i++){
             enemiesArray[i].addClass("enemyBattler");
@@ -122,14 +146,19 @@ winstonChoice.on("click", function() {
     }
 });
 
-$(".enemyBattler").on("click", function() {
-    console.log("Newest onclick is working");
-    if(enemyChosen === true){
-        console.log("An enemy has already been selected, bruv");
-    }else{
-        enemyChosen = false;
-        
-    }
+battleBtn.on("click", function() {
+    //When button clicked, user health minus enemy counter power
+    userChoice.health -= enemyBattlerChoice.counterPower;
+    console.log("User health: " + userChoice.health);
+
+    //When button clicked, enemy health minus user attack power
+    enemyBattlerChoice.health -= userChoice.attackPower;
+    console.log("Enemy health: " + enemyBattlerChoice.health);
+
+    //Double the user attack power
+    userChoice.attackPower += userChoice.attackPower;
+    console.log("User attackPower: " + userChoice.attackPower);
+
 });
 
 });
