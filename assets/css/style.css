@@ -71,11 +71,6 @@ button {
     height: 30px;
 }
 
-/******** Intial hidden elements ********/
-/* .chooseEnemy{
-    visibility: hidden;
+.hiddenDiv{
+    display: none;
 }
-
-.doBattle{
-    visibility: hidden;
-} */

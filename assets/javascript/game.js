@@ -16,6 +16,7 @@ var doomfistChoice = $(".doomfist");
 var winstonChoice = $(".winston");
 var battle = $(".battleArea");
 var battleBtn = $(".battleBtn");
+var hiddenDiv = $(".hiddenDiv");
 
 //arrays
 var enemiesArray = [];
@@ -147,18 +148,41 @@ winstonChoice.on("click", function() {
 });
 
 battleBtn.on("click", function() {
-    //When button clicked, user health minus enemy counter power
-    userChoice.health -= enemyBattlerChoice.counterPower;
-    console.log("User health: " + userChoice.health);
+    if(userChosen === true && enemyChosen === true){
+        //When button clicked, user health minus enemy counter power
+        userChoice.health -= enemyBattlerChoice.counterPower;
+        console.log("User health: " + userChoice.health);
 
-    //When button clicked, enemy health minus user attack power
-    enemyBattlerChoice.health -= userChoice.attackPower;
-    console.log("Enemy health: " + enemyBattlerChoice.health);
+        //When button clicked, enemy health minus user attack power
+        enemyBattlerChoice.health -= userChoice.attackPower;
+        console.log("Enemy health: " + enemyBattlerChoice.health);
 
-    //Double the user attack power
-    userChoice.attackPower += userChoice.attackPower;
-    console.log("User attackPower: " + userChoice.attackPower);
+        //Double the user attack power
+        userChoice.attackPower += userChoice.attackPower;
+        console.log("User attackPower: " + userChoice.attackPower);
 
+        //if user health = 0 you lose.
+        if(userChoice.health <= 0) {
+            userLosses++;
+            console.log("You lose!");
+            console.log(userLosses);
+        }
+        
+
+        if(enemyBattlerChoice.health <= 0){
+            if((tracerObject.health) <= 0){
+                tracerChoice.hide();
+            }else if ((soldierObject.health) <= 0){
+                soldierChoice.hide();
+            }else if ((doomfistObject.health) <=0){
+                doomfistChoice.hide();
+            }else if ((winstonObject.health) <=0){
+                winstonChoice.hide();
+            }
+        enemyChosen = false;
+        enemyBattlerChoice= "";
+        }
+    }
 });
 
 });
