@@ -49,7 +49,7 @@ var winstonObject = {
 //get character choice if tracer
 tracerChoice.on("click", function(){
     if(userChosen === true){
-        
+        console.log("A character was already chosen");
     }else{
         //This makes the userchoice the tracer object
         userChoice = tracerObject;
