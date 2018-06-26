@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Overwatch Game!</title>
+    <link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+</head>
+
+<body>
+    <div class="mainBox">
+        <div class="container">
+            <div class="mainContent">
+                <div class="welcome">
+                    <h1>Welcome to Overwatch Battle!</h1>
+                    <p>
+                        In this game, you will choose a character to play as by simply clicking on them. 
+                        Then one by one choose an opponent to do battle against.
+                        Whichever character you do not choose will be the enemies.
+                    </p>
+                </div>
+                <div class="chooseFighter">
+                    <h2>Choose your fighter!</h2>
+                    <p class="wins"></p>
+                    <p class="losses"></p>
+                </div>
+                <div class="characterChoices">
+                    <div class="tracer"><img src="./assets/images/tracer.png" alt="Photo of Tracer"></div>
+                    <div class="soldier"><img src="./assets/images/soldier.png" alt="Photo of Soldier"></div>
+                    <div class="doomfist"><img src="./assets/images/doomfist.png" alt="Photo of Doomfist"></div>
+                    <div class="winston"><img src="./assets/images/winston.png" alt="Photo of Winston"></div>
+                </div>
+                <div class="chooseEnemy">
+                    <h2>Choose who you wish to fight!</h2>
+                    <div class="chooseEnemyArray"></div>
+                </div>
+                <div class="doBattle">
+                    <h2> Defeat your opponent!</h2>
+                    <div class="defeatEnemy"></div>
+                    <button type="button" class"attackBtn">Attack!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="./assets/javascript/game.js"></script>
+
+</html>
