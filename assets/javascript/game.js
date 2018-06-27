@@ -1,4 +1,5 @@
 $(document).ready(function() {
+//TODO: redo all of this using functions!
 
 //user options/variables
 var userChoice = "";
@@ -25,7 +26,6 @@ var enemiesArray = [];
 var tracerObject = {
     health: 100,
     attackPower: Math.round(Math.random()*20 + 1),
-    counterPower: Math.round(Math.random()*15)
 };
 
 var soldierObject = {
@@ -56,26 +56,30 @@ function reset() {
     enemiesArray = [];
     
     userChoice = "";
-    
+
     //Resetting the objects
     tracerObject = {
         health: 100,
-        attackPower: Math.round(Math.random()*20)
+        attackPower: Math.round(Math.random()*20),
+        counterPower: Math.round(Math.random()*15)
     };
 
     soldierObject = {
         health: 150,
-        attackPower: Math.round(Math.random()*20)
+        attackPower: Math.round(Math.random()*20),
+        counterPower: Math.round(Math.random()*15)
     };
 
     doomfistObject = {
         health: 200,
-        attackPower: Math.round(Math.random()*20)
+        attackPower: Math.round(Math.random()*20),
+        counterPower: Math.round(Math.random()*15)
     };
 
     winstonObject = {
         health: 250,
-        attackPower: Math.round(Math.random()*20)
+        attackPower: Math.round(Math.random()*20),
+        counterPower: Math.round(Math.random()*15)
     };
 
 
@@ -97,10 +101,10 @@ function showGameStats() {
 }
 
 //Add health under every user
-tracerChoice.append("<div class=center> Health: " + tracerObject.health + "</div>")
-soldierChoice.append("<div class=center> Health: " + soldierObject.health + "</div>")
-doomfistChoice.append("<div class=center> Health: " + doomfistObject.health + "</div>")
-winstonChoice.append("<div class=center> Health: " + winstonObject.health + "</div>")
+tracerChoice.append("<div class=center tracerInfo> Health: " + tracerObject.health + "</div>")
+soldierChoice.append("<div class=center soldierInfo> Health: " + soldierObject.health + "</div>")
+doomfistChoice.append("<div class=center doomfistInfo> Health: " + doomfistObject.health + "</div>")
+winstonChoice.append("<div class=center winstonInfo> Health: " + winstonObject.health + "</div>")
 
 //get character choice if tracer
 tracerChoice.on("click", function(){
@@ -130,9 +134,6 @@ tracerChoice.on("click", function(){
             
         }
     }else{
-        //This makes the userchoice the tracer object
-        console.log(userChoice);
-
         //This is setting it so someone cannot pick another character
         userChosen = true;
         console.log("You picked Tracer!");
@@ -148,11 +149,9 @@ tracerChoice.on("click", function(){
             
             //Adding a class and moving the divs to the chooseEnemyArray area.
             enemiesArray[i].addClass("enemyBattler");
-            console.log(enemiesArray + " look at me");
             enemiesArray[i].appendTo($(".chooseEnemy"));
         }
         userChoice = tracerObject;
-        console.log(enemiesArray);
     }
 });
 
@@ -167,7 +166,6 @@ soldierChoice.on("click", function() {
         }
     }else{
         userChosen = true;
-        console.log("You picked soldier!");
         enemiesArray.push(tracerChoice, doomfistChoice, winstonChoice);
         $(".chooseEnemy").show();
         for (let i =0; i < enemiesArray.length; i++){
@@ -175,7 +173,6 @@ soldierChoice.on("click", function() {
             enemiesArray[i].appendTo($(".chooseEnemy"));
         }
         userChoice = soldierObject;
-        console.log(enemiesArray);
     }
 });
 
@@ -190,7 +187,6 @@ doomfistChoice.on("click", function() {
         }
     }else{
         userChosen = true;
-        console.log("You picked Doomfist!");
         enemiesArray.push(tracerChoice, soldierChoice, winstonChoice);
         $(".chooseEnemy").show();
         for (let i =0; i < enemiesArray.length; i++){
@@ -198,7 +194,6 @@ doomfistChoice.on("click", function() {
             enemiesArray[i].appendTo($(".chooseEnemy"));
         }
         userChoice = doomfistObject;
-        console.log(enemiesArray);
     }
 });
 
@@ -219,7 +214,6 @@ winstonChoice.on("click", function() {
             enemiesArray[i].addClass("enemyBattler");
             enemiesArray[i].appendTo($(".chooseEnemy"));
         }
-        console.log(enemiesArray);
         userChoice = winstonObject;
     }
 });
@@ -227,19 +221,20 @@ winstonChoice.on("click", function() {
 battleBtn.on("click", function() {
     if(userChosen === true && enemyChosen === true){
         //When button clicked, user health minus enemy counter power
+        damageReceived = enemyBattlerChoice.counterPower;
         userChoice.health -= enemyBattlerChoice.counterPower;
-        console.log("User health: " + userChoice.health);
-
+        
         //When button clicked, enemy health minus user attack power
+        damageDone = userChoice.attackPower
         enemyBattlerChoice.health -= userChoice.attackPower;
-        console.log("Enemy health: " + enemyBattlerChoice.health);
 
+        //Be sure the enemy health doesn't go below 0
         if(enemyBattlerChoice.health <= 0){
             enemyBattlerChoice.health = 0;
         }
 
         //Print the wins, user and computer health to the div
-        $(".gameStats").html("<div class='center margin'>Player health: " + userChoice.health + "</div><div class='center margin'>Enemy Health: " + enemyBattlerChoice.health + "</div><div class='center margin modifyWins'>Wins: " + userWins + "</div><div class='center margin modifyLosses'>Losses: " + userLosses + "</div>");
+        $(".gameStats").html("<div class='center margin'>Player health: " + userChoice.health + "</div><div class='center margin'>Enemy health: " + enemyBattlerChoice.health + "</div><div class='center margin'>Damage dealt: " + damageDone + "</div><div class='center margin'> Damage Received: " + damageReceived  + "</div><div class='center margin modifyWins'>Wins: " + userWins + "</div><div class='center margin modifyLosses'>Losses: " + userLosses + "</div>");
 
         //If the health of user is under 0, set it to 0 and lose the game
         if(userChoice.health <= 0) {
@@ -259,7 +254,7 @@ battleBtn.on("click", function() {
             //Tracer health = 0
             if((tracerObject.health) <= 0){
 
-                //If tracer is defeated, push her to an array
+                //If tracer is defeated, defeated ++
                 defeated++;
 
                 //Hide her, hide the button, hide the do battle
@@ -305,6 +300,8 @@ battleBtn.on("click", function() {
                 $(".gameStatsButton").hide();
                 $(".doBattle").hide();
                 userChoice = "";
+                damageDone= 0;
+                damageReceived = 0;
                 reset();
             }
 
