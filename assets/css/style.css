@@ -33,6 +33,7 @@ h2 {
     opacity:.9;
     border-radius: 2px;
     padding: 10px 0;
+    box-shadow: 5px 3px #262626;
 }
 
 .mainContent {
@@ -64,13 +65,55 @@ h2 {
 img{
     border: 2px solid rgb(52, 52, 121);
     border-radius:5px;
+    margin:2px;
 }
 
 button {
-    width: 100px;
+    width: 80%;
     height: 30px;
+    position: absolute;
+    bottom:5px;
+    margin-left:18px;
+    background-color: rgb(192, 127, 7);
+    border-radius:5px;
 }
 
 .hiddenDiv{
     display: none;
+}
+
+.gameStatsContainer {
+    position:fixed;
+    top:350px;
+    left: 950px;
+    width: 175px;
+    height:175px;
+    opacity:.9; 
+    background-color: lightgrey;
+    border-radius:2px;
+    box-shadow: 5px 3px #262626;
+}
+
+.center{
+    text-align: center;
+}
+
+.margin{
+    margin-top: 5px;
+}
+
+/******** Hidden Divs ********/
+.chooseEnemy {
+    display:none;
+}
+
+.doBattle{
+    display:none;
+}
+
+.gameStatsContainer {
+    display:none;
+}
+.gameStatsButton {
+    display:none;
 }
