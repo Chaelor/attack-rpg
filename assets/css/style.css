@@ -29,8 +29,7 @@ h2 {
     width: 800px;
     margin: 0 auto;
     margin-top: 10px;
-    background-color: lightgrey;
-    opacity:.9;
+    background-color: rgba(211, 211, 211, 0.9);
     border-radius: 2px;
     padding: 10px 0;
     box-shadow: 5px 3px #262626;
@@ -66,6 +65,14 @@ img{
     border: 2px solid rgb(52, 52, 121);
     border-radius:5px;
     margin:2px;
+}
+
+img:hover {
+    transform: translateY(-5px);
+}
+
+img:active {
+    transform: translateY(-2px);
 }
 
 button {
