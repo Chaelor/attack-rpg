@@ -29,7 +29,6 @@ header{
 header h1{
     font-family: 'Kurale', serif;
     color:white;
-    position: relative;
 }
 
 footer{
@@ -55,8 +54,12 @@ footer{
 
 .navbar {
     padding:0;
-    color:white;
     font-family: 'Kurale', serif;
+}
+
+.nav-item {
+    animation: moveInLeftItem 1s ease-out .33s;
+    animation-fill-mode: backwards;
 }
 
 .nav-item:hover{
@@ -67,6 +70,38 @@ footer{
 .ml-auto {
     margin-top: 7px;
     justify-content: center;
+}
+
+@keyframes moveInLeft{
+    0%{
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    80% {
+        transform: translateX(10px);
+    }
+
+    100%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes  moveInLeftItem{
+    0%{
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    80% {
+        transform: translateX(10px);
+    }
+
+    100%{
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 /******** Container ********/
 .mainBox {
